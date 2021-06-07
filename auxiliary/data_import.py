@@ -10,7 +10,6 @@ pd.options.display.float_format = "{:,.2f}".format
 
 
 # Importing data
-
 def importing_regiondata():
     """
     Loads the regiondata
@@ -40,10 +39,17 @@ def table_1_a(data):
 
 # Creating Table 2 (regression table: Effect of moisture on urbanization: heterogeneity by industrialization)
 def table_2(data):
+    """
+    check out: https://www.vincentgregoire.com/standard-errors-in-python/ AND http://aeturrell.com/2018/02/20/econometrics-in-python-partII-fixed-effects/ 
+    """
     df = data.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
-    formula = "ADurbfrac ~ ADsm0_2moistu + firsturbfrac + lndiscst + countryyear-1"
-    stat = smf.ols(formula = formula, data=df).fit()
-    return stat.summary()
+    #c(var) for fixed effect - "-1" for dropping intercept
+    formula = "ADurbfrac ~ ADsm0_2moistu + firsturbfrac + lndiscst + C(countryyear) -1"
+    #for clustered errors
+    stat = smf.ols(formula = formula, data=df).fit(cov_type='cluster',
+                                                        cov_kwds={'groups': df['afruid']},
+                                                        use_t=True)
+    return stat
 
 # Creating Figure 4 (Variability of climate change in Africa)
 def figure_4(data):
@@ -60,3 +66,13 @@ def figure_4(data):
     figure = plt.show()
     return figure
 
+# Creating Table 6 (Change in city output and rainfall: heterogeneity by industrialization)
+def table_6(data):
+
+    #i.year in stata means time fixed effects
+    formula = "dlnl1 ~ dlnrain30 + C(year) -1"
+    #for clustered errors
+    stat = smf.ols(formula = formula, data=data).fit(cov_type='cluster',
+                                                        cov_kwds={'groups': data['agidison']},
+                                                        use_t=True)
+    return stat
