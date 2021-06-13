@@ -1,5 +1,9 @@
 name: student_project
 
+channel:
+#- defaults
+- conda-forge #geopandas says it can lead to issues to take packages from different channels
+
 dependencies:
 - numpy
 - pandas
@@ -8,7 +12,8 @@ dependencies:
 - seaborn
 - scipy
 - statsmodels
+# Spatial analysis
+- geopandas
+- libpysal
 - pip
 - pip:
-
-
