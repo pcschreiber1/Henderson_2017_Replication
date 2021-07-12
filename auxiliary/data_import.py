@@ -5,6 +5,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.formula.api as smf
+import geopandas as gpd
+import shapely.geometry as geom
 
 pd.options.display.float_format = "{:,.2f}".format
 
@@ -13,11 +15,54 @@ pd.options.display.float_format = "{:,.2f}".format
 def importing_regiondata():
     """
     Loads the regiondata
-
+        Should convert the year column to proper year
+        
+        Should immediately create geopandas dataframe
     Returns: a dataframe
     """
     regiondata = pd.read_stata("data/regiondata.dta")
     return regiondata
+
+# Get spatial data
+def get_spatialdata():
+    """
+    Converts regiondata into GeoPandas DF and projects it
+
+    Returns: a dataframe
+    """
+    #creating geopandas dataframe
+    regiondata = pd.read_stata("data/regiondata.dta") #--> need to also do for other 
+    regiondata = regiondata.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
+
+    #creating geopandas dataframe
+    regiondata["geometry"] = regiondata[["lon", "lat"]].apply(geom.Point, axis=1) #take each row
+    regiondata = gpd.GeoDataFrame(regiondata)
+    regiondata.crs = "EPSG:4326"
+    return regiondata
+
+# Get shape file
+def get_shapefile():
+    #Shapefile African Countries
+    ##Source https://africaopendata.org/dataset?tags=shapefiles
+    A_countries = gpd.read_file("C:/Projects/ose-data-science-course-project-pcschreiber1/data/afr_g2014_2013_0.shp")
+    A_countries.crs = "EPSG:4326"
+
+    #Global shapefile with provinces
+    ##Source https://www.naturalearthdata.com/downloads/10m-cultural-vectors/
+    prov = gpd.read_file("C:/Projects/ose-data-science-course-project-pcschreiber1/data/shapefile_provinces/ne_10m_admin_1_states_provinces.shp")
+    prov.crs = "EPSG:4326"
+
+    #Create Shapefile of Africa with provinces
+    A_countries = A_countries["ISO2"].dropna() #identify country codes
+    prov["Africa"] = None #container column
+
+    for i in A_countries: #loop over country codes
+        cond = prov["iso_a2"] == i
+        prov.loc[cond, "Africa"] = "True" #identify african countries
+
+    africa = prov[prov["Africa"] == "True"] #create new shapefile
+
+    return africa
 
 # Creating table 1 a (regiondata)
 def table_1_a(data):
