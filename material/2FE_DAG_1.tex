@@ -1,0 +1,94 @@
+%\documentclass[10pt]{article}
+%\documentclass[crop,tikz,convert=pdf2svg]{standalone} %for an svg
+\documentclass[%
+  border={5pt 5pt 5pt 5pt}, % left bottom right top
+  convert %=pdf2svg %for an svg
+]{standalone}%
+
+\usepackage{color}
+\usepackage{tikz}
+%%Source: https://dkumor.com/posts/technical/2018/08/15/causal-tikz/
+% Tikz settings optimized for causal graphs.
+% Just copy-paste this part
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{document}
+
+\begin{tikzpicture}
+%Time fixed effects
+    \node (background1) at (-8.5,1) {\textbf{\large{Time Fixed Effects}}};
+    % Unit 1
+
+    %%Nodes
+    \node[state, fill=black, text=white] (y1) at (-8,0) {$Y_{i1}$};
+    \node[state] (m1) [below =of y1] {$M_{i1}$};
+    \node[state, fill=black, text=white] (i1) [left =of m1] {$I_{i1}$};
+    \node[state, fill=black, text=white] (d1) [below =of m1] {$D_{i1}$};
+    \node[state] (u1) [below =of y1, yshift=-3cm, xshift=2cm] {$U_{1}$};]
+     
+	%%Nodes
+	\node[state, fill=black, text=white] (y2) [above =of u1, yshift=3cm, xshift=2cm] {$Y_{i2}$};
+    \node[state] (m2) [below =of y2] {$M_{i2}$};
+    \node[state, fill=black, text=white] (i2) [right =of m2] {$I_{i2}$};
+    \node[state, fill=black, text=white] (d2) [below =of m2] {$D_{i2}$};
+   
+     
+    
+    % Directed edge    
+    \path (m1) edge (y1);   
+    \path (i1) edge (m1);
+    \path (i1) edge (y1);
+    \path (d1) edge (m1);
+    \path (u1) edge[dashed] (y1);
+    \path (u1) edge[dashed] (m1);
+    
+    \path (m2) edge (y2);   
+    \path (i2) edge (m2);
+    \path (i2) edge (y2);
+    \path (d2) edge (m2);
+    \path (u1) edge[dashed] (y2);
+    \path (u1) edge[dashed] (m2);
+    \path (m1) edge (m2);   
+    
+%%seperator
+	\filldraw [black] (0,-5.5) rectangle (0,1);
+ 
+%% Unit fixed effects
+    \node (background1) at (2.5,1) {\textbf{\large{Unit Fixed Effects}}};
+
+	%%Nodes
+	\node[state, fill=black, text=white] (y4) at (8,0) {$Y_{2t}$};
+    \node[state] (m4) [below =of y4] {$M_{2t}$};
+    \node[state, fill=black, text=white] (i4) [right =of m4] {$I_{2t}$};
+    \node[state, fill=black, text=white] (d4) [below =of m4] {$D_{2t}$};
+    \node[state] (u3) at (5,0) [below =of y4, yshift=-3cm, xshift=-2cm] {$U_{1}$};   
+    
+    \node[state, fill=black, text=white] (y3) [above =of u3, yshift=3cm, xshift=-2cm] {$Y_{2t}$};
+    \node[state] (m3) [below =of y3] {$M_{2t}$};
+    \node[state, fill=black, text=white] (i3) [left =of m3] {$I_{2t}$};
+    \node[state, fill=black, text=white] (d3) [below =of m3] {$D_{2t}$};
+    
+    % Directed edge
+    \path (m3) edge (y3);   
+    \path (i3) edge (m3);
+    \path (i3) edge (y3);
+    \path (d3) edge (m3);
+    \path (u3) edge[dashed] (y3);
+    \path (u3) edge[dashed] (m3);
+    
+    \path (m4) edge (y4);   
+    \path (i4) edge (m4);
+    \path (i4) edge (y4);
+    \path (d4) edge (m4);
+    \path (u3) edge[dashed] (y4);
+    \path (u3) edge[dashed] (m4);
+    \path (m3) edge (m4);   
+    
+\end{tikzpicture}
+\end{document}
