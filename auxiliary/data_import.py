@@ -40,8 +40,34 @@ def get_spatialdata():
     regiondata.crs = "EPSG:4326"
     return regiondata
 
+
 # Get shape file
 def get_shapefile():
+    #creating relevant shapefile
+    #--------------------
+    regiondata = pd.read_stata("data/regiondata.dta") #--> need to also do for other 
+    #regiondata = regiondata.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
+
+    ###creating geopandas dataframe
+    regiondata["geometry"] = regiondata[["lon", "lat"]].apply(geom.Point, axis=1) #take each row
+    regiondata = gpd.GeoDataFrame(regiondata)
+    regiondata.crs = "EPSG:4326"
+
+    ### districts shapefile
+    areg = gpd.read_file("data/Henderson_shapefile/afrregnew.gdb")
+    areg.crs = "EPSG:4326"
+
+    ### coastlien shapefile
+    coast = gpd.read_file("data/afr_g2014_2013_0.shp")
+    coast.crs = "EPSG:4326"
+
+    ### Joining region data and districts
+    gdb_join = gpd.sjoin(regiondata, areg, how="right", op="within")
+
+    return gdb_join, coast
+
+# Get shape file
+def get_shapefile_2():
     #Shapefile African Countries
     ##Source https://africaopendata.org/dataset?tags=shapefiles
     A_countries = gpd.read_file("C:/Projects/ose-data-science-course-project-pcschreiber1/data/afr_g2014_2013_0.shp")
