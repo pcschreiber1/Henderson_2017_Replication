@@ -11,7 +11,9 @@ dependencies:
 - seaborn
 - scipy
 - statsmodels
+- geopandas
+- libpysal
+- pysal
 - pip
 - pip:
-
 
