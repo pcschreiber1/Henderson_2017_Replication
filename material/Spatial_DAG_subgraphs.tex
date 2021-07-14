@@ -115,6 +115,10 @@
     % connection I1 and I2
     \path[red] (i3) edge[bend left=30] (i4);
     \path[red] (i4) edge[bend right=30] (i3);
+    
+    % connection Y1 and Y2
+    \path[red] (y3) edge (y4);
+    \path[red] (y4) edge (y3);
 
 	%Title
 	\node (background1) [above =of d3, yshift=-0.5cm] {\textbf{\LARGE{b)}}}; 
@@ -166,6 +170,11 @@
     % connection D1 and D2
     \path[red] (d5) edge[bend left=5] (d6);
     \path[red] (d6) edge[bend right=5] (d5);
+    
+    % connection Y1 and Y2
+    \path[red] (y5) edge (y6);
+    \path[red] (y6) edge (y5);
+        
 	%Title
 	\node (background1) [above =of d5, yshift=-0.5cm] {\textbf{\LARGE{c)}}}; 
 \end{tikzpicture}
