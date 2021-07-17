@@ -15,15 +15,15 @@ pd.options.display.float_format = "{:,.2f}".format
 
 # SLX sample
 def simulate_SLX_sample(num_obs,
-                            knn = 10,
-                            beta = 0.9,
-                            gamma = 0.25):
+                        knn = 10,
+                        beta = 0.9,
+                        gamma = 0.25):
     """Simulate spatial sample with only spillover from treatment variable
         "Y = WD + X"
 
     Args:
         num_obs: An integer that specifies the number of individuals
-            to sample.
+            to sample. Needs to be either 100 or 10.000 for the weight matrix.
 
     Returns:
         Returns a dataframe with the observables (Y, X, D) as well as
@@ -37,11 +37,20 @@ def simulate_SLX_sample(num_obs,
     df["D"] = np.random.randint(2, size=num_obs) #binary treatment
     df["X"] = np.random.normal(size=num_obs)
     
-    # generate grid for weight matrix
-    x,y=np.indices((10, 10))
-    x.shape=(num_obs,1)
-    y.shape=(num_obs,1)
-    data=np.hstack([x,y])
+    if num_obs == 100:
+            # generate grid for weight matrix
+            x,y=np.indices((10, 10))
+            x.shape=(num_obs,1)
+            y.shape=(num_obs,1)
+            data=np.hstack([x,y])
+    elif num_obs == 10000:
+            # generate grid for weight matrix
+            x,y=np.indices((100, 100))
+            x.shape=(num_obs,1)
+            y.shape=(num_obs,1)
+            data=np.hstack([x,y])
+    else:
+            raise AssertionError # needs to be 100 or 10.000 for constructing weight matrix
 
     # weight matrix
     w = lp.weights.KNN(data, k = knn)
@@ -81,11 +90,20 @@ def simulate_SDM_sample(num_obs,
     df["D"] = np.random.randint(2, size=num_obs) #binary treatment
     df["X"] = np.random.normal(size=num_obs)
     
-    # generate grid for weight matrix
-    x,y=np.indices((10, 10))
-    x.shape=(num_obs,1)
-    y.shape=(num_obs,1)
-    data=np.hstack([x,y])
+    if num_obs == 100:
+            # generate grid for weight matrix
+            x,y=np.indices((10, 10))
+            x.shape=(num_obs,1)
+            y.shape=(num_obs,1)
+            data=np.hstack([x,y])
+    elif num_obs == 10000:
+            # generate grid for weight matrix
+            x,y=np.indices((100, 100))
+            x.shape=(num_obs,1)
+            y.shape=(num_obs,1)
+            data=np.hstack([x,y])
+    else:
+            raise AssertionError # needs to be 100 or 10.000 for constructing weight matrix
 
     # weight matrix
     w = lp.weights.KNN(data, k = knn)
@@ -102,6 +120,7 @@ def simulate_SDM_sample(num_obs,
     df["Y_1_no_spill"] = df["Y_1"]
     df["Y_0_no_spill"] = df["Y_0"]
     
+    # iterate to generate general equilibrium effect (already settles after 5 times for small rho)
     for i in range(0,10):
         df["WY"] = np.dot(w.full()[0], df["Y"].to_numpy())#not standardized
         df["Y"] = beta*df["X"] + gamma*df["WD"] + gamma*df["D"] + rho* df["WY"]   
