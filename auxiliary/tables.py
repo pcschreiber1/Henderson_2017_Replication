@@ -140,7 +140,7 @@ def get_table_countrydata(regressors, specification, data):
     # beware! codes set manually
     container.columns = pd.MultiIndex.from_product(
             [specification.keys(),
-            ['Urbanization rate', 'Std.err', 'P-Value', 'Growth in capital city']]
+            ['Urbanization rate', 'Std.err', 'P-Value', 'Capital city growth']]
             ).set_codes([
                 [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4,4],
                 [3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 0, 2, 1]
@@ -220,7 +220,10 @@ def get_table_citydata(regressors, specification, data):
         
         container = pd.concat([container, table], axis=1)
 
-
+    # Change variable names to labels
+    codebook = get_data_codebook("citydata")
+    container = container.rename(codebook, axis="index")
+    
     
     container.columns = pd.MultiIndex.from_product(
             [specification.keys(),
@@ -314,3 +317,20 @@ def get_conflict_specification():
                         "extent_agH_dlnrainLcflcnt3_50",
                         "extent_agH_dlnrainLnatconflict"]}
     return regressors, specification
+
+def get_data_codebook(dataset):
+    """
+    For obtaining dictionary of variable labels
+    Inputs: dataset (string), Name of the data set (one of: regiondata, citydata, countrydata)
+        
+    Returns: codebook (dictionary)
+    """
+    if dataset == "citydata":
+        codes = pd.read_stata("data/citydata.dta", iterator=True).variable_labels()
+        
+    elif dataset == "regiondata":
+        codes = pd.read_stata("data/regiondata.dta", iterator=True).variable_labels()
+        
+    else:
+        raise AssertionError # incorret dataset name
+    return codes
