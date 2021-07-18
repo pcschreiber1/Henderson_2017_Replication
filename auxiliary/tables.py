@@ -78,6 +78,7 @@ def get_table_countrydata(regressors, specification, data):
         - data: data frame (regiondata)
         
     Returns: container (pandas data frame with regression results)
+        Beware! Multiindex codes set manually!
     """
     ## get list of regressors
     #regressors = []
@@ -136,11 +137,14 @@ def get_table_countrydata(regressors, specification, data):
         container = pd.concat([container, table], axis=1)
 
 
-    
+    # beware! codes set manually
     container.columns = pd.MultiIndex.from_product(
             [specification.keys(),
-            ['Urbanization rate', 'Std.err', 'P-Value',]]
-            )
+            ['Urbanization rate', 'Std.err', 'P-Value', 'Growth in capital city']]
+            ).set_codes([
+                [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4,4],
+                [3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 0, 2, 1]
+                ], level=[0, 1])
     container = container.style.format('{:.2f}',na_rep='')
 
     return container
@@ -220,8 +224,93 @@ def get_table_citydata(regressors, specification, data):
     
     container.columns = pd.MultiIndex.from_product(
             [specification.keys(),
-            ['Urbanization rate', 'Std.err', 'P-Value',]]
+            ['City output', 'Std.err', 'P-Value',]]
             )
     container = container.style.format('{:.3f}',na_rep='')
 
     return container
+
+# coflict specification
+def get_conflict_specification():
+    """
+    For obtaining order of regressors and regression specificaiton of table 8.
+        
+    Returns: regressors (list), specification (dictionary)
+    """
+    # specifying order of display
+    regressors = ["dlnrain30",
+                "extent_agH_dlnrain",
+                "cflcnt3",
+                "cflcnt3_50",
+                "natconflict",
+                "extent_agHcflcnt3",
+                "extent_agHcflcnt3_50",
+                "extent_agHnatconflict",
+                "dlnrain30cflcnt3",
+                "dlnrain30cflcnt3_50",
+                "dlnrain30natconflict",
+                "extent_agH_dlnraincflcnt3",
+                "extent_agH_dlnraincflcnt3_50",
+                "extent_agH_dlnrainnatconflict",
+                "Lcflcnt3",
+                "Lcflcnt3_50",
+                "Lnatconflict",
+                "extent_agHLcflcnt3",
+                "extent_agHLcflcnt3_50",
+                "extent_agHLnatconflict",
+                "dlnrain30Lcflcnt3",
+                "dlnrain30Lcflcnt3_50",
+                "dlnrain30Lnatconflict",
+                "extent_agH_dlnrainLcflcnt3",
+                "extent_agH_dlnrainLcflcnt3_50",
+                "extent_agH_dlnrainLnatconflict"]
+
+    specification = {"8.1 - No conflict baseliness": 
+                        ["dlnrain30",
+                        "extent_agH_dlnrain"],
+                    "8.2 - With conflict": 
+                        ["dlnrain30",
+                        "extent_agH_dlnrain",
+                        "cflcnt3",
+                        "cflcnt3_50",
+                        "natconflict"],
+                    "8.3 - Interaction conflict-lack of industry": 
+                        ["dlnrain30",
+                        "extent_agH_dlnrain",
+                        "cflcnt3",
+                        "cflcnt3_50",
+                        "natconflict",
+                        "extent_agHcflcnt3",
+                        "extent_agHcflcnt3_50",
+                        "extent_agHnatconflict"],
+                    "8.4 - Interaction conflict-rainfall": 
+                        ["dlnrain30",
+                        "extent_agH_dlnrain",
+                        "cflcnt3",
+                        "cflcnt3_50",
+                        "natconflict",
+                        "extent_agHcflcnt3",
+                        "extent_agHcflcnt3_50",
+                        "extent_agHnatconflict",
+                        "dlnrain30cflcnt3",
+                        "dlnrain30cflcnt3_50",
+                        "dlnrain30natconflict",
+                        "extent_agH_dlnraincflcnt3",
+                        "extent_agH_dlnraincflcnt3_50",
+                        "extent_agH_dlnrainnatconflict"],
+                    "8.5 - Lag of conflict": 
+                        ["dlnrain30",
+                        "extent_agH_dlnrain",
+                        "Lcflcnt3",
+                        "Lcflcnt3_50",
+                        "Lnatconflict",
+                        "extent_agHLcflcnt3",
+                        "extent_agHLcflcnt3_50",
+                        "extent_agHLnatconflict",
+                        "dlnrain30Lcflcnt3",
+                        "dlnrain30Lcflcnt3_50",
+                        "dlnrain30Lnatconflict",
+                        "extent_agH_dlnrainLcflcnt3",
+                        "extent_agH_dlnrainLcflcnt3_50",
+                        "extent_agH_dlnrainLnatconflict"]}
+    return regressors, specification
