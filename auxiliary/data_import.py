@@ -10,19 +10,6 @@ import shapely.geometry as geom
 
 pd.options.display.float_format = "{:,.2f}".format
 
-#get simulation results
-def get_simulation_results():
-    SLX_sim = pd.read_csv("data/SLX_sim.csv", index_col=0)
-    SDM_sim = pd.read_csv("data/SLX_sim.csv", index_col=0)
-    backdoor_sim = pd.read_csv("data/backdoor_sim.csv", index_col=0)
-
-    table = pd.concat([SLX_sim, SDM_sim, backdoor_sim], axis=1)
-    table.columns = pd.MultiIndex.from_product(
-        [['SLX Simulation', 'SDM Simulation', 'backdoor Simulation'],['Simple', 'Small', 'Large']]
-        )
-        
-    return Sim_results
-
 # Importing data
 def importing_regiondata():
     """

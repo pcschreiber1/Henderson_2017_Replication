@@ -16,7 +16,7 @@ pd.options.display.float_format = "{:,.2f}".format
 #get simulation results
 def get_simulation_results():
     SLX_sim = pd.read_csv("data/SLX_sim.csv", index_col=0)
-    SDM_sim = pd.read_csv("data/SLX_sim.csv", index_col=0)
+    SDM_sim = pd.read_csv("data/SDM_sim.csv", index_col=0)
     backdoor_sim = pd.read_csv("data/backdoor_sim.csv", index_col=0)
 
     table = pd.concat([SLX_sim, SDM_sim, backdoor_sim], axis=1)
@@ -209,3 +209,4 @@ def simulate_backdoor_sample(num_obs,
         df["Y_0"] = beta*df["X"] + gamma*df["WD"] + rho* df["WY"]   
     
     return df, w
+

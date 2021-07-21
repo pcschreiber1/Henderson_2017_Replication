@@ -55,13 +55,13 @@ def map_data_section():
     districts.plot(column="ADsm0_2moistu", ax=axs[0], scheme='quantiles', legend=True, linewidth=0, cmap='RdPu')
     coast.boundary.plot(ax=axs[0], color='grey')
     axs[0].set_axis_off()
-    axs[0].set_title("Moisture change at first census")
+    axs[0].set_title("Moisture change at first census", fontweight="bold")
 
     # City-level
     citydata.plot(column="dlnrain30", ax=axs[1], scheme='quantiles', legend=True,markersize=2, cmap='RdPu')
     coast.boundary.plot(ax=axs[1], color='grey')
     axs[1].set_axis_off()
-    axs[1].set_title("City rainfall change (1992)")
+    axs[1].set_title("City rainfall change (1992)", fontweight="bold")
 
     # Display the figure
     plt.show()
