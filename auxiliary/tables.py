@@ -238,6 +238,57 @@ def get_table_citydata(regressors, specification, data):
 
     return container
 
+# get spatial regression table regiondata
+def get_table_spatial_reg(regressors, specification, data, w):
+    """
+    Generates a SDM estimate
+    Inputs:
+        - regressors: array of column names
+        - specification: dictionary with column names
+        - data: data frame (regiondata)
+        - w: weight_matrix Geopandas object
+        
+    Returns: container (pandas data frame with regression results)
+    """
+    container = pd.DataFrame()
+
+    container['regressors'] = regressors
+    container = container.set_index('regressors')
+
+    for key in specification.keys():
+        table = pd.DataFrame({'Urbanization rate': [], 'Std.err': [], 'P-Value': [],})
+
+
+        # preparing data
+        y = regiondata["ADurbfrac"].to_numpy()
+        y = np.reshape(y, (y.size, 1))
+
+
+        x = np.array([regiondata[name] for name in specification[key]]).T
+        
+        #row standardize matrix
+        w.transform = 'r'
+        
+        #two-stage regression
+        result = spreg.GM_Lag(y, x, w=w,w_lags=1, name_y='ADurbfrac', name_x = specification[key])
+        
+        lags = ["WY"]
+        variables = specification[key].extend(lags)
+        for coef, _ in enumerate(specification[key]):
+            coef += 1 #because of intercept
+            outputs = [result.betas[coef][0], result.std_err[coef], result.z_stat[coef][1]]
+            table.loc[_] = outputs
+        
+        container = pd.concat([container, table], axis=1)
+
+    container.columns = pd.MultiIndex.from_product(
+            [specification.keys(),
+            ['Urbanization rate', 'Std.err', 'P-Value',]]
+            )
+    container = container.style.format('{:.3f}',na_rep='')
+
+    return container
+
 # coflict specification
 def get_conflict_specification():
     """
