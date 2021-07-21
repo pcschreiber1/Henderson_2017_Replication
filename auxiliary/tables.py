@@ -93,8 +93,8 @@ def get_table_countrydata(regressors, specification, data):
     container = container.set_index('regressors')
 
     for key in specification.keys():
-        if key == "5.5 - Growth of capital city": #one regression on change in primacy
-            table = pd.DataFrame({'Growth of capital city': [], 'Std.err': [], 'P-Value': [],})
+        if key == "5.5 - Growth of captial city": #one regression on change in primacy
+            table = pd.DataFrame({'Capital city growth': [], 'Std.err': [], 'P-Value': [],})
 
             table['regressors'] = regressors
             table = table.set_index('regressors')
@@ -123,7 +123,6 @@ def get_table_countrydata(regressors, specification, data):
                 formula = formula + f" +{regressors}"
 
 
-            #c(var) for fixed effect - "-1" for dropping intercept
             result = smf.ols(
                 formula = formula, data=data
                 ).fit(cov_type='HC1')#.fit(
@@ -136,16 +135,22 @@ def get_table_countrydata(regressors, specification, data):
         
         container = pd.concat([container, table], axis=1)
 
-
-    # beware! codes set manually
-    container.columns = pd.MultiIndex.from_product(
+    if key == "Only primate industry":
+        container.columns = pd.MultiIndex.from_product(
             [specification.keys(),
-            ['Urbanization rate', 'Std.err', 'P-Value', 'Capital city growth']]
-            ).set_codes([
-                [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4,4],
-                [3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 0, 2, 1]
-                ], level=[0, 1])
-    container = container.style.format('{:.2f}',na_rep='')
+            ['Capital city growth', 'Std.err', 'P-Value',]]
+        )
+        container = container.style.format('{:.3f}',na_rep='')
+    else:
+        # beware! codes set manually
+        container.columns = pd.MultiIndex.from_product(
+                [specification.keys(),
+                ['Urbanization rate', 'Std.err', 'P-Value', 'Capital city growth']]
+                ).set_codes([
+                    [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4,4],
+                    [3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 0, 2, 1]
+                    ], level=[0, 1])
+        container = container.style.format('{:.2f}',na_rep='')
 
     return container
 
@@ -318,6 +323,66 @@ def get_conflict_specification():
                         "extent_agH_dlnrainLnatconflict"]}
     return regressors, specification
 
+# district level robustness checks
+def get_district_robustness_specification():
+    """
+    For obtaining order of regressors and regression specificaiton of table 3.
+            
+    Returns: regressors (list), specification (dictionary)
+    """
+    #specifying order of display
+    regressors = ["ADsm0_2moistu",
+                "extent_agH_ADsm0_2moistu",
+                "ADsm0_2moistu_nb",
+                "extent_agH_ADsm0_2moistu_nb",
+                "ADsm0_2preu",
+                "ADsm0_2tmpu",
+                "extent_agH_ADsm0_2preu",
+                "extent_agH_ADsm0_2tmpu",
+                "extent_agH",
+                "firsturbfrac",
+                "lndiscst",
+                "ADsm0_2moistulndiscst"]
+
+    #keys will be displayed in the regression table
+    specification = {"3.1 - Distance to coast": 
+                        ["ADsm0_2moistu",
+                        "extent_agH_ADsm0_2moistu",
+                        "ADsm0_2moistulndiscst",
+                        "extent_agH",
+                        "firsturbfrac",
+                        "lndiscst"],
+                    "3.2 - No interaction": 
+                        ["ADsm0_2moistu",
+                        "ADsm0_2moistulndiscst",
+                        "extent_agH",
+                        "firsturbfrac",
+                        "lndiscst"],
+                    "3.3 - Neighborhood effect": 
+                        ["ADsm0_2moistu",
+                        "ADsm0_2moistu_nb",
+                        "extent_agH_ADsm0_2moistu",
+                        "extent_agH_ADsm0_2moistu_nb",
+                        "extent_agH",
+                        "extent_agH_ADsm0_2moistu",
+                        "firsturbfrac",
+                        "lndiscst"],
+                    "3.4 - Precipitation": 
+                        ["ADsm0_2preu",
+                        "extent_agH_ADsm0_2preu",
+                        "extent_agH",
+                        "firsturbfrac",
+                        "lndiscst"],
+                    "3.5 - Precipitation and temperature": 
+                        ["ADsm0_2preu",
+                        "extent_agH_ADsm0_2preu",
+                        "ADsm0_2tmpu",
+                        "extent_agH_ADsm0_2tmpu",
+                        "extent_agH",
+                        "firsturbfrac",
+                        "lndiscst"]}
+    return regressors, specification
+
 def get_data_codebook(dataset):
     """
     For obtaining dictionary of variable labels
@@ -327,10 +392,31 @@ def get_data_codebook(dataset):
     """
     if dataset == "citydata":
         codes = pd.read_stata("data/citydata.dta", iterator=True).variable_labels()
+
+        manual_entries = {
+            "Lcflcnt3": "1(inside conflict t-1)",
+            "Lcflcnt3_50": "1(outside conflict t-1)",
+            "Lnatconflict": "1(national conflict t-1)",
+            "extent_agHLcflcnt3": "1(inside conflict t-1)*(14-#all ind.)",
+            "extent_agHLcflcnt3_50": "1(outside conflict t-1)*(14-#all ind.)",
+            "extent_agHLnatconflict": "1(national conflict t-1)*(14-#all ind.)",
+            "dlnrain30Lcflcnt3": "delta ln(rain(t))*1(inside conflict t-1)",
+            "dlnrain30Lcflcnt3_50": "delta ln(rain(t))*1(outside conflict t-1)",
+            "dlnrain30Lnatconflict": "delta ln(rain(t))*1(national conflict t-1)",
+            "extent_agH_dlnrainLcflcnt3": "delta ln(rain(t))*1(inside conflict t-1)*(14-#all ind)",
+            "extent_agH_dlnrainLcflcnt3_50": "delta ln(rain(t))*1(outside conflict t-1)*(14-#all ind)",
+            "extent_agH_dlnrainLnatconflict": "delta ln(rain(t))*1(national conflict t-1)*(14-#all ind)"
+            }
+
+        codes.update(manual_entries)
         
     elif dataset == "regiondata":
         codes = pd.read_stata("data/regiondata.dta", iterator=True).variable_labels()
         
     else:
         raise AssertionError # incorret dataset name
+
+    # combine the stata labels with the manual additions
+    codes.update(manual_entries)
+
     return codes
