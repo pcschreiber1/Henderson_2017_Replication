@@ -163,14 +163,12 @@
     \path (i6) edge (y6);
     \path (d6) edge (m6);
     \path[bidirected] (y6) edge[] (u6);
-    
-    % connection I1 and I2
-    \path[red] (i5) edge[bend left=30] (i6);
-    \path[red] (i6) edge[bend right=30] (i5);
-    
+      
     % connection Y1 and Y2
     \path[red] (y5) edge (y6);
     \path[red] (y6) edge (y5);
+    \path[red] (d5) edge[bend left=15] (y6);
+    \path[red] (d6) edge[bend right=15] (y5);
         
 	%Title
 	\node (background1) [above =of d5, yshift=-0.5cm] {\textbf{\LARGE{c)}}}; 

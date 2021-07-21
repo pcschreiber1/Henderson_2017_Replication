@@ -407,7 +407,7 @@ def get_data_codebook(dataset):
             "extent_agH_dlnrainLcflcnt3_50": "delta ln(rain(t))*1(outside conflict t-1)*(14-#all ind)",
             "extent_agH_dlnrainLnatconflict": "delta ln(rain(t))*1(national conflict t-1)*(14-#all ind)"
             }
-
+        # combine the stata labels with the manual additions
         codes.update(manual_entries)
         
     elif dataset == "regiondata":
@@ -416,7 +416,5 @@ def get_data_codebook(dataset):
     else:
         raise AssertionError # incorret dataset name
 
-    # combine the stata labels with the manual additions
-    codes.update(manual_entries)
 
     return codes

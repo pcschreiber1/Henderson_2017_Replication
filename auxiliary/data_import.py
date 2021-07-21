@@ -38,19 +38,31 @@ def importing_regiondata():
 # Get spatial data
 def get_spatialdata():
     """
-    Converts regiondata into GeoPandas DF and projects it
+    Converts regiondata and citydata into GeoPandas DF and projects it
 
-    Returns: a dataframe
+    Returns: two GeoPandas dataframes (regiondata, citydata)
     """
-    #creating geopandas dataframe
+    #district level
+    ##creating pandas dataframe
     regiondata = pd.read_stata("data/regiondata.dta") #--> need to also do for other 
-    regiondata = regiondata.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
+    #regiondata = regiondata.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
 
-    #creating geopandas dataframe
+    ##creating geopandas dataframe
     regiondata["geometry"] = regiondata[["lon", "lat"]].apply(geom.Point, axis=1) #take each row
     regiondata = gpd.GeoDataFrame(regiondata)
     regiondata.crs = "EPSG:4326"
-    return regiondata
+    
+    #city level
+    ##creating pandas dataframe
+    citydata = pd.read_stata("data/citydata.dta")
+    #regiondata = regiondata.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
+
+    ##creating geopandas dataframe
+    citydata["geometry"] = citydata[["lon", "lat"]].apply(geom.Point, axis=1) #take each row
+    citydata = gpd.GeoDataFrame(citydata)
+    citydata.crs = "EPSG:4326"
+    
+    return regiondata, citydata
 
 
 # Get shape file
