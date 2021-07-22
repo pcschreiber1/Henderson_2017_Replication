@@ -4,25 +4,12 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.ticker
 import statsmodels.formula.api as smf
-import seaborn as sns
-
-#For spatial analysis
 import geopandas as gpd
 import shapely.geometry as geom
-import libpysal as lp #For spatial weights
-
-from pysal.viz import splot #exploratory analysis
-from pysal.explore import esda #exploratory analysis
-from pysal.model import spreg #For spatial regression
 
 pd.options.display.float_format = "{:,.2f}".format
 
-from auxiliary.data_import import *
-from auxiliary.plots import *
-from auxiliary.simulations import *
-from auxiliary.tables import *
 
 # Importing data
 def importing_regiondata():
@@ -39,31 +26,19 @@ def importing_regiondata():
 # Get spatial data
 def get_spatialdata():
     """
-    Converts regiondata and citydata into GeoPandas DF and projects it
+    Converts regiondata into GeoPandas DF and projects it
 
-    Returns: two GeoPandas dataframes (regiondata, citydata)
+    Returns: a dataframe
     """
-    #district level
-    ##creating pandas dataframe
+    #creating geopandas dataframe
     regiondata = pd.read_stata("data/regiondata.dta") #--> need to also do for other 
-    #regiondata = regiondata.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
+    regiondata = regiondata.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
 
-    ##creating geopandas dataframe
+    #creating geopandas dataframe
     regiondata["geometry"] = regiondata[["lon", "lat"]].apply(geom.Point, axis=1) #take each row
     regiondata = gpd.GeoDataFrame(regiondata)
     regiondata.crs = "EPSG:4326"
-    
-    #city level
-    ##creating pandas dataframe
-    citydata = pd.read_stata("data/citydata.dta")
-    #regiondata = regiondata.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
-
-    ##creating geopandas dataframe
-    citydata["geometry"] = citydata[["lon", "lat"]].apply(geom.Point, axis=1) #take each row
-    citydata = gpd.GeoDataFrame(citydata)
-    citydata.crs = "EPSG:4326"
-    
-    return regiondata, citydata
+    return regiondata
 
 
 # Get shape file

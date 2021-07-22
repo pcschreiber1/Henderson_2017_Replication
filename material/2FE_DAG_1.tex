@@ -22,7 +22,7 @@
 
 \begin{tikzpicture}
 %Time fixed effects
-    \node (background1) at (-8.5,1) {\textbf{\large{Unit Fixed Effects}}};
+    \node (background1) at (-8.5,1) {\textbf{\large{Time Fixed Effects}}};
     % Unit 1
 
     %%Nodes
@@ -47,7 +47,6 @@
     \path (d1) edge (m1);
     \path (u1) edge[dashed] (y1);
     \path (u1) edge[dashed] (m1);
-    \path (u1) edge[dashed][bend left=40] (i1);
     
     \path (m2) edge (y2);   
     \path (i2) edge (m2);
@@ -56,13 +55,12 @@
     \path (u1) edge[dashed] (y2);
     \path (u1) edge[dashed] (m2);
     \path (m1) edge (m2);   
-    \path (u1) edge[dashed][bend right=40] (i2);
     
 %%seperator
 	\filldraw [black] (0,-5.5) rectangle (0,1);
  
 %% Unit fixed effects
-    \node (background1) at (2.5,1) {\textbf{\large{Time Fixed Effects}}};
+    \node (background1) at (2.5,1) {\textbf{\large{Unit Fixed Effects}}};
 
 	%%Nodes
 	\node[state, fill=black, text=white] (y4) at (8,0) {$Y_{2t}$};
@@ -83,7 +81,6 @@
     \path (d3) edge (m3);
     \path (u3) edge[dashed] (y3);
     \path (u3) edge[dashed] (m3);
-    \path (u3) edge[dashed][bend left=40] (i3);
     
     \path (m4) edge (y4);   
     \path (i4) edge (m4);
@@ -92,7 +89,6 @@
     \path (u3) edge[dashed] (y4);
     \path (u3) edge[dashed] (m4);
     \path (m3) edge (m4);   
-    \path (u3) edge[dashed][bend right=40] (i4);
     
 \end{tikzpicture}
 \end{document}
