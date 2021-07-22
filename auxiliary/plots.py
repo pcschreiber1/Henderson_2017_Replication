@@ -4,13 +4,25 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker
 import statsmodels.formula.api as smf
+import seaborn as sns
+
+#For spatial analysis
 import geopandas as gpd
 import shapely.geometry as geom
+import libpysal as lp #For spatial weights
 
-from auxiliary.data_import import *
+from pysal.viz import splot #exploratory analysis
+from pysal.explore import esda #exploratory analysis
+from pysal.model import spreg #For spatial regression
 
 pd.options.display.float_format = "{:,.2f}".format
+
+from auxiliary.data_import import *
+from auxiliary.plots import *
+from auxiliary.simulations import *
+from auxiliary.tables import *
 
 def map_countries():
     """

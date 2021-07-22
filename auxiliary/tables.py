@@ -4,14 +4,25 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker
 import statsmodels.formula.api as smf
+import seaborn as sns
+
+#For spatial analysis
 import geopandas as gpd
 import shapely.geometry as geom
 import libpysal as lp #For spatial weights
 
-from auxiliary.data_import import *
+from pysal.viz import splot #exploratory analysis
+from pysal.explore import esda #exploratory analysis
+from pysal.model import spreg #For spatial regression
 
 pd.options.display.float_format = "{:,.2f}".format
+
+from auxiliary.data_import import *
+from auxiliary.plots import *
+from auxiliary.simulations import *
+from auxiliary.tables import *
 
 # get reg table regiondata
 def get_table_regiondata(regressors, specification, data):
@@ -59,6 +70,10 @@ def get_table_regiondata(regressors, specification, data):
             table.loc[coef] = outputs
         
         container = pd.concat([container, table], axis=1)
+
+    # Change variable names to labels
+    codebook = get_data_codebook("regiondata")
+    container = container.rename(codebook, axis="index")
 
     container.columns = pd.MultiIndex.from_product(
             [specification.keys(),
@@ -134,7 +149,10 @@ def get_table_countrydata(regressors, specification, data):
 
         
         container = pd.concat([container, table], axis=1)
-
+    
+    # Change variable names to labels
+    codebook = get_data_codebook("countrydata")
+    container = container.rename(codebook, axis="index")
     if key == "Only primate industry":
         container.columns = pd.MultiIndex.from_product(
             [specification.keys(),
@@ -239,7 +257,7 @@ def get_table_citydata(regressors, specification, data):
     return container
 
 # get spatial regression table regiondata
-def get_table_spatial_reg(regressors, specification, data, w):
+def get_table_spatial_reg(regressors, specification, regiondata, w):
     """
     Generates a SDM estimate
     Inputs:
@@ -281,6 +299,9 @@ def get_table_spatial_reg(regressors, specification, data, w):
         
         container = pd.concat([container, table], axis=1)
 
+    # Change variable names to labels
+    codebook = get_data_codebook("regiondata")
+    container = container.rename(codebook, axis="index")
     container.columns = pd.MultiIndex.from_product(
             [specification.keys(),
             ['Urbanization rate', 'Std.err', 'P-Value',]]
@@ -463,9 +484,45 @@ def get_data_codebook(dataset):
         
     elif dataset == "regiondata":
         codes = pd.read_stata("data/regiondata.dta", iterator=True).variable_labels()
-        
+        manual_entries = {
+            "ADsm0_1moistu": "delta moisture_1",
+            "ADsm0_2moistu": "delta moisture_2",
+            "ADsm0_3moistu": "delta moisture_3",
+            "ADsm0_4moistu": "delta moisture_4",
+            "ADsm0_2preu": "delta precipitation",
+            "ADsm0_2tmpu": "delta temperature",
+            "ADsm0_2moistu_nb": "neighbors' delta moisture_2",
+            "ADsm0_2moistu_lag": "W*delta moisture_2",
+            "WY": "WY"
+            }
+
+        # combine the stata labels with the manual additions
+        codes.update(manual_entries)        
+
+    elif dataset == "countrydata":
+        codes = pd.read_stata("data/countrydata.dta", iterator=True).variable_labels()        
+    
+    
     else:
         raise AssertionError # incorret dataset name
 
 
     return codes
+
+def LM_Test_Spatial_Dependence(specification, key, regiondata):
+    #filtering out outliers
+    regiondata = regiondata.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
+    #weight matrix
+    w = lp.weights.KNN.from_dataframe(regiondata, k=8) #k nearest neighbour weights
+    #row standardize matrix
+    w.transform = 'r'
+    
+    # preparing data
+    y = regiondata["ADurbfrac"].to_numpy()
+    y = np.reshape(y, (y.size, 1))
+    
+    x = np.array([regiondata[name] for name in specification[key]]).T
+    
+    ols=spreg.OLS(y,x,w=w,name_y="ADurbfrac", name_x=specification[key],nonspat_diag=False, spat_diag=True)
+    
+    print(f"For the Lagrange Multiplier test of spatial dependence, the p-value of rejecting the null of zero dependence of\n-The spatial lag is {ols.lm_lag[1]: .2f} \n-The spatial error is {ols.lm_error[1]: .2f}\n-The independent variables {ols.lm_sarma[1]: .2f}")

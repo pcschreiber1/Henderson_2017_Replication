@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.16)  19 JUL 2021 18:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.16)  22 JUL 2021 18:34
 entering extended mode
 **./2FE_DAG_1.tex
 (2FE_DAG_1.tex
@@ -611,20 +611,20 @@ Missing character: There is no ] in font nullfont!
 {C:/Users/Philipp Schreiber/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] (2F
 E_DAG_1.aux) ) 
 Here is how much of TeX's memory you used:
- 15386 strings out of 479624
- 350172 string characters out of 2859409
- 627690 words of memory out of 3000000
- 32290 multiletter control sequences out of 15000+200000
+ 15417 strings out of 479624
+ 350841 string characters out of 2859409
+ 631117 words of memory out of 3000000
+ 32321 multiletter control sequences out of 15000+200000
  404045 words of font info for 29 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,7n,106p,468b,699s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 108i,7n,106p,468b,734s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/Philipp Schreiber/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Philipp Schreiber/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Philipp Schre
 iber/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:
 /Users/Philipp Schreiber/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
 nts/cm/cmr7.pfb>
-Output written on 2FE_DAG_1.pdf (1 page, 39193 bytes).
+Output written on 2FE_DAG_1.pdf (1 page, 39424 bytes).
 PDF statistics:
  25 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
