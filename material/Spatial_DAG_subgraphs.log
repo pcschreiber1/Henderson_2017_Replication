@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.16)  14 JUL 2021 12:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.16)  21 JUL 2021 14:44
 entering extended mode
 **./Spatial_DAG_subgraphs.tex
 (Spatial_DAG_subgraphs.tex
@@ -609,15 +609,16 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 Missing character: There is no ] in font nullfont!
 Missing character: There is no ] in font nullfont!
 Missing character: There is no ] in font nullfont!
+Missing character: There is no ] in font nullfont!
  [1
 
 {C:/Users/Philipp Schreiber/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] (Sp
 atial_DAG_subgraphs.aux) ) 
 Here is how much of TeX's memory you used:
- 15506 strings out of 479624
- 352139 string characters out of 2859409
- 662290 words of memory out of 3000000
- 32410 multiletter control sequences out of 15000+200000
+ 15578 strings out of 479624
+ 353061 string characters out of 2859409
+ 684827 words of memory out of 3000000
+ 32482 multiletter control sequences out of 15000+200000
  404045 words of font info for 29 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,7n,106p,480b,762s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -626,7 +627,7 @@ KTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Philipp Schreiber/AppD
 ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/P
 hilipp Schreiber/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
 mr7.pfb>
-Output written on Spatial_DAG_subgraphs.pdf (1 page, 34716 bytes).
+Output written on Spatial_DAG_subgraphs.pdf (1 page, 36188 bytes).
 PDF statistics:
  21 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
