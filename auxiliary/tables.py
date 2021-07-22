@@ -1,4 +1,4 @@
-"""This module contains auxiliary functions for generating graphs which are used in the main notebook."""
+"""This module contains auxiliary functions for generating tavles which are used in the main notebook."""
 
 #Packages
 import pandas as pd
@@ -19,10 +19,10 @@ from pysal.model import spreg #For spatial regression
 
 pd.options.display.float_format = "{:,.2f}".format
 
-from auxiliary.data_import import *
-from auxiliary.plots import *
-from auxiliary.simulations import *
-from auxiliary.tables import *
+from data_import import *
+from plots import *
+from simulations import *
+#from tables import *
 
 # get reg table regiondata
 def get_table_regiondata(regressors, specification, data):

@@ -19,10 +19,10 @@ from pysal.model import spreg #For spatial regression
 
 pd.options.display.float_format = "{:,.2f}".format
 
-from auxiliary.data_import import *
-from auxiliary.plots import *
-from auxiliary.simulations import *
-from auxiliary.tables import *
+from data_import import *
+#from plots import *
+from simulations import *
+from tables import *
 
 def map_countries():
     """
@@ -56,6 +56,10 @@ def map_data_section(districts, coast, citydata):
         Map 2: city level change of rainfall
  
     """
+    #import the shapefiles
+    districts, coast = get_shapefile()
+    _, citydata = get_spatialdata()
+
     f, axs = plt.subplots(nrows=1, ncols=2, figsize=(16, 12))
     axs = axs.flatten()# Make the axes accessible with single indexing
 
