@@ -49,17 +49,13 @@ def map_countries():
     plt.savefig("material/map_countries.png", bbox_inches='tight')
     plt.close(f) #avoids the plot being printed
 
-def map_data_section():
+def map_data_section(districts, coast, citydata):
     """
     Generates a graph with two maps, side by side.
         Map 1: district level change of moisture
         Map 2: city level change of rainfall
  
     """
-    #import the shapefiles
-    districts, coast = get_shapefile()
-    _, citydata = get_spatialdata()
-
     f, axs = plt.subplots(nrows=1, ncols=2, figsize=(16, 12))
     axs = axs.flatten()# Make the axes accessible with single indexing
 

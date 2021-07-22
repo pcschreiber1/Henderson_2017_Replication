@@ -70,8 +70,7 @@ def get_spatialdata():
 def get_shapefile():
     #creating relevant shapefile
     #--------------------
-    regiondata = pd.read_stata("data/regiondata.dta") #--> need to also do for other 
-    #regiondata = regiondata.query("abspctileADsm0_2moistu > 6 & abspctileADurbfrac > 6")
+    regiondata = pd.read_stata("data/regiondata.dta") 
 
     ###creating geopandas dataframe
     regiondata["geometry"] = regiondata[["lon", "lat"]].apply(geom.Point, axis=1) #take each row
@@ -90,30 +89,6 @@ def get_shapefile():
     gdb_join = gpd.sjoin(regiondata, areg, how="right", op="within")
 
     return gdb_join, coast
-
-# Get shape file
-def get_shapefile_2():
-    #Shapefile African Countries
-    ##Source https://africaopendata.org/dataset?tags=shapefiles
-    A_countries = gpd.read_file("C:/Projects/ose-data-science-course-project-pcschreiber1/data/afr_g2014_2013_0.shp")
-    A_countries.crs = "EPSG:4326"
-
-    #Global shapefile with provinces
-    ##Source https://www.naturalearthdata.com/downloads/10m-cultural-vectors/
-    prov = gpd.read_file("C:/Projects/ose-data-science-course-project-pcschreiber1/data/shapefile_provinces/ne_10m_admin_1_states_provinces.shp")
-    prov.crs = "EPSG:4326"
-
-    #Create Shapefile of Africa with provinces
-    A_countries = A_countries["ISO2"].dropna() #identify country codes
-    prov["Africa"] = None #container column
-
-    for i in A_countries: #loop over country codes
-        cond = prov["iso_a2"] == i
-        prov.loc[cond, "Africa"] = "True" #identify african countries
-
-    africa = prov[prov["Africa"] == "True"] #create new shapefile
-
-    return africa
 
 # Creating table 1 a (regiondata)
 def table_1_a(data):
