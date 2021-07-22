@@ -11,7 +11,8 @@ import seaborn as sns
 #For spatial analysis
 import geopandas as gpd
 import shapely.geometry as geom
-import libpysal as lp #For spatial weights
+import libpysal as lp 
+from libpysal import weights
 
 from pysal.viz import splot #exploratory analysis
 from pysal.explore import esda #exploratory analysis
