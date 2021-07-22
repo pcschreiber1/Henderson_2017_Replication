@@ -14,5 +14,6 @@ dependencies:
 - geopandas
 - libpysal
 - pysal
+- spreg>=1.2.2
 - pip
 - pip:
