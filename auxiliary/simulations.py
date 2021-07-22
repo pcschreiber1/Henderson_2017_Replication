@@ -20,10 +20,9 @@ from pysal.model import spreg #For spatial regression
 
 pd.options.display.float_format = "{:,.2f}".format
 
-from data_import import *
-from plots import *
-#from simulations import *
-from tables import *
+from auxiliary.data_import import *
+from auxiliary.plots import *
+from auxiliary.tables import *
 
 #get simulation results
 def get_simulation_results():
