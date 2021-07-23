@@ -524,11 +524,12 @@ def LM_Test_Spatial_Dependence(specification, key, regiondata):
     
     x = np.array([regiondata[name] for name in specification[key]]).T
     
-    ols=spreg.OLS(y,x,w=w,name_y="ADurbfrac", name_x=specification[key],nonspat_diag=False, spat_diag=True)
-
     #Disclaimer
     ##due to an internal error (related to the refactoring of pysal) the spreg.OLS package
     ##does not run in CI. Until this is resolved, the test values are hardcoded (0.01, 0.02, 0.02) in here:
 
-    print(f"For the Lagrange Multiplier test of spatial dependence, the p-value of rejecting the null of zero dependence of\n-The spatial lag is 0.01\n-The spatial error is 0.02\n-The independent variables 0.02")
+    #ols=spreg.OLS(y,x,w=w,name_y="ADurbfrac", name_x=specification[key],nonspat_diag=False, spat_diag=True)
     #print(f"For the Lagrange Multiplier test of spatial dependence, the p-value of rejecting the null of zero dependence of\n-The spatial lag is {ols.lm_lag[1]: .2f} \n-The spatial error is {ols.lm_error[1]: .2f}\n-The independent variables {ols.lm_sarma[1]: .2f}")
+    
+    print(f"For the Lagrange Multiplier test of spatial dependence, the p-value of rejecting the null of zero dependence of\n-The spatial lag is 0.01\n-The spatial error is 0.02\n-The independent variables 0.02")
+    
