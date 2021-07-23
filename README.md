@@ -6,6 +6,8 @@ Henderson et al. investigate the impact of increasing aridity on urbanization in
 
 The replication is carried out on the main notebook `Replication_notebook` in this repository. The auxiliary folder contains different functions made for loading and processing the spatial data, tables and plots. The replication can also be visualized using nbviewer and mybinder:
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/OpenSourceEconomics/ose-data-science-course-project-pcschreiber1/master?filepath=Replication_notebook.ipynb)
+
 To ensure the reproducibility of the project, the repository is supported by a GitHub Actions Continuos Integration (CI) workflow. Its current state  can be found here:
 
 </a>
