@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.16)  10 JUL 2021 20:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.16)  23 JUL 2021 11:31
 entering extended mode
-**./Spatial_DAG_emphasis_M_1.tex
-(Spatial_DAG_emphasis_M_1.tex
+**./Spatial_DAG_colour_2.tex
+(Spatial_DAG_colour_2.tex
 LaTeX2e <2020-10-01> patch level 3
 L3 programming layer <2020-12-07> xparse <2020-03-03>
 ("C:\Users\Philipp Schreiber\AppData\Local\Programs\MiKTeX\tex/latex/standalone
@@ -67,13 +67,13 @@ File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 \bibindent=\dimen138
 )
 \sa@box=\box47
-runsystem(pdflatex  -shell-escape  -jobname "Spatial_DAG_emphasis_M_1" "\expand
-after\def\csname sa@internal@run\endcsname{1}\input{Spatial_DAG_emphasis_M_1}")
-...disabled (restricted).
+runsystem(pdflatex  -shell-escape  -jobname "Spatial_DAG_colour_2" "\expandafte
+r\def\csname sa@internal@run\endcsname{1}\input{Spatial_DAG_colour_2}")...disab
+led (restricted).
 
 \sa@read=\read2
-runsystem(imgconvert -density 300 -units PixelsPerInch Spatial_DAG_emphasis_M_1
-.pdf  -quality 90 Spatial_DAG_emphasis_M_1.png)...disabled (restricted).
+runsystem(imgconvert -density 300 -units PixelsPerInch Spatial_DAG_colour_2.pdf
+  -quality 90 Spatial_DAG_colour_2.png)...disabled (restricted).
 
 
 
@@ -563,8 +563,8 @@ l3backend-pdftex.def"
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count276
 \l__pdf_internal_box=\box80
-) (Spatial_DAG_emphasis_M_1.aux)
-\openout1 = `Spatial_DAG_emphasis_M_1.aux'.
+) (Spatial_DAG_colour_2.aux)
+\openout1 = `Spatial_DAG_colour_2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
 LaTeX Font Info:    ... okay on input line 21.
@@ -610,21 +610,23 @@ Missing character: There is no ] in font nullfont!
  [1
 
 {C:/Users/Philipp Schreiber/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] (Sp
-atial_DAG_emphasis_M_1.aux) ) 
+atial_DAG_colour_2.aux) ) 
 Here is how much of TeX's memory you used:
- 15350 strings out of 479624
- 350120 string characters out of 2859409
- 617338 words of memory out of 3000000
- 32254 multiletter control sequences out of 15000+200000
- 403430 words of font info for 27 fonts, out of 3000000 for 9000
+ 15345 strings out of 479624
+ 349930 string characters out of 2859409
+ 616904 words of memory out of 3000000
+ 32247 multiletter control sequences out of 15000+200000
+ 404045 words of font info for 29 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,7n,106p,483b,758s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/Philipp Schreiber/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Philipp Schreiber/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-Output written on Spatial_DAG_emphasis_M_1.pdf (1 page, 23135 bytes).
+ 108i,7n,106p,479b,758s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/Philipp Schreiber/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Philipp Schreiber/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Ph
+ilipp Schreiber/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+r7.pfb>
+Output written on Spatial_DAG_colour_2.pdf (1 page, 32192 bytes).
 PDF statistics:
- 17 PDF objects out of 1000 (max. 8388607)
+ 21 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
