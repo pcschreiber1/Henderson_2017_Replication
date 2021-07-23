@@ -4,22 +4,9 @@
 
 Henderson et al. investigate the impact of increasing aridity on urbanization in Sub-Saharan Africa. In particular, the authors address the questions of i) whether adverse changes in climate induce a push from rural to urban areas and ii) how this within-country migration affects incomes in cities. They attribute previous studies' mixed findings to aggregation effects resulting from using national level data and, therefore, use variation at the district and city level. To enable such an analysis the authors constructed a panel data set combining district level census data, fine resolution climate data and night time lights (NTLs) between 1960 and 2008. The authors' central finding is that climate shocks only produce rural-urban movements if cities are can offer alternative employment options. 
 
-The replication is carried out on the main notebook `Replication_notebook`from this repository. The auxiliary folder contains different functions made for loading and processing the spatial data, tables and plots. The replication can also be visualized using nbviewer and mybinder:
+The replication is carried out on the main notebook `Replication_notebook` in this repository. The auxiliary folder contains different functions made for loading and processing the spatial data, tables and plots. The replication can also be visualized using nbviewer and mybinder:
 
-<a href="https://nbviewer.jupyter.org/github/OpenSourceEconomics/ose-data-science-course-project-pcschreiber1/blob/master/Replication_notebook.ipynb"
-   target="_parent">
-   <img align="center"
-  src="https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.png"
-      width="109" height="20">
-</a>
-<a href="https://mybinder.org/v2/gh/OpenSourceEconomics/ose-data-science-course-project-pcschreiber1/master?filepath=Replication_notebook.ipynb"
-    target="_parent">
-    <img align="center"
-       src="https://mybinder.org/badge_logo.svg"
-       width="109" height="20">
-</a>
-
-To ensure the reproducibility of the project, the repository is supported by a GitHub Actions Continuos Integration (CI). The state of my workflow can be found here:
+To ensure the reproducibility of the project, the repository is supported by a GitHub Actions Continuos Integration (CI) workflow. Its current state  can be found here:
 
 </a>
 <a href="https://github.com/OpenSourceEconomics/ose-data-science-course-project-pcschreiber1/actions/workflows/ci.yml"
