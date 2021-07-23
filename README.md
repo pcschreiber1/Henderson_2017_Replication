@@ -28,3 +28,9 @@ To ensure the reproducibility of the project, the repository is supported by a G
        src="https://github.com/OpenSourceEconomics/ose-data-science-course-project-carolinalvarez/actions/workflows/ci.yml/badge.svg"
        width="200" height="20">
 </a>
+
+# Key References
+
+* **Kolak, M., Anselin, L., 2019**. [A Spatial Perspective on the Econometrics of Program Evaluation](https://doi.org/10.1177/0160017619869781). *International Regional Science Review* 43, 128–153.
+
+* **Rey, S., Arribas-Bel, D., Wolf, L., 2020**. [Geographic Data Science with Python](https://geographicdata.science/book/intro.html), *Jupyter Book*. ed.
