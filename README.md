@@ -8,7 +8,7 @@ The replication is carried out on the main notebook `Replication_notebook` in th
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/OpenSourceEconomics/ose-data-science-course-project-pcschreiber1/master?filepath=Replication_notebook.ipynb)
 
-To ensure the reproducibility of the project, the repository is supported by a GitHub Actions Continuos Integration (CI) workflow. Its current state  can be found here:
+To ensure the reproducibility of the project, the repository is supported by a GitHub Actions Continuos Integration (CI) workflow. Under CI, the `Simulation notebook` only runs a small-sample simulation for control (without storing the results), because it is too computationally expensive for the workflow. The full simulation is  Its current state  can be found here:
 
 </a>
 <a href="https://github.com/OpenSourceEconomics/ose-data-science-course-project-pcschreiber1/actions/workflows/ci.yml"
