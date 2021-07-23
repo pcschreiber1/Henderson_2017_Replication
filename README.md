@@ -22,10 +22,10 @@ The replication is carried out on the main notebook `Replication_notebook`from t
 To ensure the reproducibility of the project, the repository is supported by a GitHub Actions Continuos Integration (CI). The state of my workflow can be found here:
 
 </a>
-<a href="https://github.com/OpenSourceEconomics/ose-data-science-course-project-carolinalvarez/actions/workflows/ci.yml"
+<a href="https://github.com/OpenSourceEconomics/ose-data-science-course-project-pcschreiber1/actions/workflows/ci.yml"
     target="_parent">
     <img align="center"
-       src="https://github.com/OpenSourceEconomics/ose-data-science-course-project-carolinalvarez/actions/workflows/ci.yml/badge.svg"
+       src="https://github.com/OpenSourceEconomics/ose-data-science-course-project-pcschreiber1/actions/workflows/ci.yml/badge.svg"
        width="200" height="20">
 </a>
 
