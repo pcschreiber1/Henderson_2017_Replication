@@ -11,10 +11,10 @@ The replication is carried out on the main notebook `Replication_notebook` in th
 To ensure the reproducibility of the project, the repository is supported by a GitHub Actions Continuos Integration (CI) workflow. Under CI, the `Simulation notebook` only runs a small-sample simulation for control (without storing the results), because it is too computationally expensive for the workflow. The full simulation is  Its current state  can be found here:
 
 </a>
-<a href="https://github.com/OpenSourceEconomics/ose-data-science-course-project-pcschreiber1/actions/workflows/ci.yml"
+<a href="https://pcschreiber1/Henderson_2017_Replication/actions/workflows/ci.yml"
     target="_parent">
     <img align="center"
-       src="https://github.com/OpenSourceEconomics/ose-data-science-course-project-pcschreiber1/actions/workflows/ci.yml/badge.svg"
+       src="https://pcschreiber1/Henderson_2017_Replicatin/actions/workflows/ci.yml/badge.svg"
        width="200" height="20">
 </a>
 
