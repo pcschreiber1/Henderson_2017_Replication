@@ -14,5 +14,3 @@ dependencies:
 - geopandas
 - libpysal
 - pysal
-- pip
-- pip:
