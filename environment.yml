@@ -8,11 +8,11 @@ dependencies:
 - python=3.6
 - numpy
 - pandas
-- jupyterlab
-- matplotlib
-- seaborn
-- scipy
-- statsmodels
-- geopandas
+# - jupyterlab
+# - matplotlib
+# - seaborn
+# - scipy
+# - statsmodels
+# - geopandas
 # - libpysal
 # - pysal
