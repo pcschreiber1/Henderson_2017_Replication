@@ -9,10 +9,10 @@ dependencies:
 - numpy
 - pandas
 # - jupyterlab
-# - matplotlib
-# - seaborn
-# - scipy
-# - statsmodels
+- matplotlib
+- seaborn
+- scipy
+- statsmodels
 # - geopandas
 # - libpysal
 # - pysal
