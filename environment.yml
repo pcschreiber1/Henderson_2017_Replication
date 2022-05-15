@@ -5,13 +5,13 @@ channels:
 
 dependencies:
 # - python=3.6
-# - numpy
-# - pandas
-# # - jupyterlab
-# - matplotlib
-# - seaborn
-# - scipy
-# - statsmodels
+- numpy
+- pandas
+# - jupyterlab
+- matplotlib
+- seaborn
+- scipy
+- statsmodels
 - geopandas=0.8.0
 # - libpysal
 - pysal=2.0
