@@ -12,6 +12,6 @@ dependencies:
 - seaborn
 - scipy
 - statsmodels
-- geopandas=0.8.0
+- geopandas=0.8.2
 - libpysal=4.4.0
 - pysal=2.4

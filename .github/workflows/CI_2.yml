@@ -22,6 +22,7 @@ jobs:
     - name: Show discoverable envs
       run: |
         conda info --envs
+        conda list
     - name: execute notebooks
       shell: bash -l {0}
       run: |
