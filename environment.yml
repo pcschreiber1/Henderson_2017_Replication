@@ -13,5 +13,5 @@ dependencies:
 - scipy
 - statsmodels
 - geopandas=0.8.0
-- libpysal=4.3.4
+- libpysal=4.4.0
 - pysal=2.0
