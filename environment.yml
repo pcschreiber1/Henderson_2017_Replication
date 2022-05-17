@@ -4,15 +4,14 @@ channels:
 - conda-forge
 
 dependencies:
+# - python=3.6
 - numpy
 - pandas
-- jupyterlab
+- jupyter
 - matplotlib
 - seaborn
-- scipy
+- scipy=1.7.*
 - statsmodels
-- geopandas
-- libpysal
-- pysal
-- pip
-- pip:
+- geopandas=0.8.2
+- libpysal=4.4.0
+- pysal=2.4
