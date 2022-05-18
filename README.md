@@ -1,6 +1,6 @@
 # OSE data science final project | Philipp Schreiber | Summersemester 2021
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/pcschreiber1/Henderson_2017_Replication/Continuous%20Integration?logo=Github)
+[![Continuous Integration](https://github.com/pcschreiber1/Urbanisation_ClimateShocks/actions/workflows/ci.yml/badge.svg)](https://github.com/pcschreiber1/Urbanisation_ClimateShocks/actions/workflows/ci.yml)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pcschreiber1/Henderson_2017_Replication/HEAD)
 ---
 
